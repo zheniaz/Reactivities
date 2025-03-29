@@ -5,6 +5,7 @@ import { formatDate } from "../../../lib/util/util";
 type Props = {
 	activity: Activity;
 };
+
 export default function ActivityDetailsInfo({ activity }: Props) {
 	return (
 		<Paper sx={{ mb: 2 }}>
