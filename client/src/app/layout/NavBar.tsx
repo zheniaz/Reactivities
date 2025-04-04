@@ -51,6 +51,7 @@ export default function NavBar() {
 								Create Activity
 							</MenuItemLink>
 							<MenuItemLink to="/counter">Counter</MenuItemLink>
+							<MenuItemLink to="/errors">Errors</MenuItemLink>
 							<MenuItem
 								sx={{
 									fontSize: "1.2rem",
