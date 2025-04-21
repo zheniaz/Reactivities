@@ -11,7 +11,6 @@ namespace API.Controllers
     // Derived from the BaseApiController, because it has routes
     public class ActivitiesController : BaseApiController
     {
-
         [HttpGet]
         public async Task<ActionResult<List<Activity>>> GetActivities()
         {
