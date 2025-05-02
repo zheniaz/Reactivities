@@ -5,6 +5,7 @@ using Application.Activities.Queries;
 using App.Activities.Queries;
 using Application.Activities.Commands;
 using Application.Activities.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -12,7 +13,7 @@ namespace API.Controllers
     public class ActivitiesController : BaseApiController
     {
         [HttpGet]
-        public async Task<ActionResult<List<Activity>>> GetActivities()
+        public async Task<ActionResult<List<ActivityDto>>> GetActivities()
         {
             try
             {
@@ -25,7 +26,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Activity>> GetActivityDetail(string id)
+        public async Task<ActionResult<ActivityDto>> GetActivityDetail(string id)
         {
             return HandleResult(await Mediator.Send(new GetActivityDetails.Query { Id = id }));
         }
@@ -36,16 +37,25 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new CreateActivity.Command { ActivityDto = activityDto }));
         }
 
-        [HttpPut]
-        public async Task<ActionResult> EditActivity(EditActivityDto activity)
+        [HttpPut("{id}")]
+        [Authorize(Policy = "IsActivityHost")]
+        public async Task<ActionResult> EditActivity(string id, EditActivityDto activity)
         {
+            activity.Id = id;
             return HandleResult(await Mediator.Send(new EditActivity.Command { ActivityDto = activity }));
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Policy = "IsActivityHost")]
         public async Task<ActionResult> DeleteActivity(string id)
         {
             return HandleResult(await Mediator.Send(new DeleteActivity.Command { Id = id }));
+        }
+
+        [HttpPost("{id}/attend")]
+        public async Task<ActionResult> Attend(string id)
+        {
+            return HandleResult(await Mediator.Send(new UpdateAttendance.Command { Id = id }));
         }
     }
 }
