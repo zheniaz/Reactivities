@@ -10,7 +10,7 @@ export default function ActivityList() {
 	if (!activities) return <Typography>No activities found</Typography>;
 
 	return (
-		<Box sx={{ display: "flex", gap: 3, flexDirection: "column" }}>
+		<Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
 			{activities.map((activity) => (
 				<ActivityCard
 					key={activity.id}
