@@ -51,7 +51,7 @@ namespace API.Controllers
                 user.DisplayName,
                 user.Email,
                 user.Id,
-                user.UserName,
+                user.ImageUrl,
             });
         }
 
