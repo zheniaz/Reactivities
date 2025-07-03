@@ -36,7 +36,10 @@ export default function UserMenu() {
 					display={"flex"}
 					alignItems="center"
 					gap={2}>
-					<Avatar />
+					<Avatar
+						src={currentUser?.imageUrl}
+						alt="current user image"
+					/>
 					{currentUser?.displayName}
 				</Box>
 			</Button>
@@ -59,7 +62,7 @@ export default function UserMenu() {
 				</MenuItem>
 				<MenuItem
 					component={Link}
-					to="/profile"
+					to={`/profiles/${currentUser?.id}`}
 					onClick={handleClose}>
 					<ListItemIcon>
 						<Person />

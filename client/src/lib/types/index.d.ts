@@ -14,6 +14,7 @@ type Activity = {
 	isHost: boolean;
 	hostId: string;
 	hostDisplayName: string;
+	hostImageUrl: string;
 };
 
 type Profile = {
@@ -23,14 +24,19 @@ type Profile = {
 	imageUrl?: string;
 };
 
+type Photo = {
+	id: string;
+	url: string;
+};
+
 type User = {
 	id: string;
 	displayName: string;
-	imageURL?: string;
+	imageUrl?: string;
 	email: string;
 };
 
-export type LocationIQSuggestion = {
+type LocationIQSuggestion = {
 	place_id: string;
 	osm_id: string;
 	osm_type: string;
@@ -46,7 +52,7 @@ export type LocationIQSuggestion = {
 	address: LocationIQAddress;
 };
 
-export type LocationIQAddress = {
+type LocationIQAddress = {
 	name: string;
 	road?: string;
 	neighbourhood?: string;

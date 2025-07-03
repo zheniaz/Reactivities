@@ -26,8 +26,8 @@ public class ProfilesController : BaseApiController
     {
         return HandleResult(await Mediator.Send(new DeletePhoto.Command { PhotoId = photoId }));
     }
-    [HttpPut("{photoId}/setMain")]
 
+    [HttpPut("{photoId}/setMain")]
     public async Task<ActionResult> SetMainPhoto(string photoId)
     {
         return HandleResult(await Mediator.Send(new SetMainPhoto.Command { PhotoId = photoId }));
