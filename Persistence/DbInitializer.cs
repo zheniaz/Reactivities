@@ -10,9 +10,9 @@ public class DbInitializer
     {
         var users = new List<User>
         {
-            new User{ DisplayName = "Bob", UserName="bob@test.com", Email="bob@test.com" },
-            new User{ DisplayName = "Tom", UserName="Tom@test.com", Email="v@test.com" },
-            new User{ DisplayName = "Jane", UserName="Jane@test.com", Email="Jane@test.com" }
+            new User{ Id="bob-id", DisplayName = "Bob", UserName="bob@test.com", Email="bob@test.com" },
+            new User{ Id="tom-id", DisplayName = "Tom", UserName="Tom@test.com", Email="v@test.com" },
+            new User{ Id="jane-id", DisplayName = "Jane", UserName="Jane@test.com", Email="Jane@test.com" }
         };
 
         if (!userManager.Users.Any())

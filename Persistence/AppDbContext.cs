@@ -12,22 +12,38 @@ public class AppDbContext(DbContextOptions options) : IdentityDbContext<User>(op
     public required DbSet<ActivityAttendee> ActivityAttendees { get; set; }
     public required DbSet<Photo> Photos { get; set; }
     public required DbSet<Comment> Comments { get; set; }
+    public required DbSet<UserFollowing> UserFollowings { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
-        builder.Entity<ActivityAttendee>(x => x.HasKey(a => new { a.UserId, a.ActivityId }));
+        builder.Entity<ActivityAttendee>(x => x.HasKey(a => new { a.ActivityId, a.UserId }));
 
         builder.Entity<ActivityAttendee>()
-            .HasOne(u => u.User)
-            .WithMany(a => a.Activities)
-            .HasForeignKey(ua => ua.UserId);
+            .HasOne(x => x.User)
+            .WithMany(x => x.Activities)
+            .HasForeignKey(x => x.UserId);
 
         builder.Entity<ActivityAttendee>()
-            .HasOne(u => u.Activity)
-            .WithMany(a => a.Attendees)
-            .HasForeignKey(ua => ua.ActivityId);
+            .HasOne(x => x.Activity)
+            .WithMany(x => x.Attendees)
+            .HasForeignKey(x => x.ActivityId);
+
+        builder.Entity<UserFollowing>(x =>
+        {
+            x.HasKey(k => new { k.ObserverId, k.TargetId });
+
+            x.HasOne(o => o.Observer)
+                .WithMany(f => f.Followings)
+                .HasForeignKey(o => o.ObserverId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            x.HasOne(o => o.Target)
+                .WithMany(f => f.Followers)
+                .HasForeignKey(o => o.TargetId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
 
         var dateTimeConverter = new ValueConverter<DateTime, DateTime>(
             v => v.ToUniversalTime(),

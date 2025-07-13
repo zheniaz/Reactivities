@@ -1,6 +1,5 @@
 import * as React from "react";
 import Popover from "@mui/material/Popover";
-import { Profile } from "../../../lib/types";
 import { useState } from "react";
 import { Avatar } from "@mui/material";
 import { Link } from "react-router";
@@ -28,6 +27,10 @@ export default function AvatarPopover({ profile }: Props) {
 			<Avatar
 				alt={profile.displayName + " image"}
 				src={profile.imageUrl}
+				sx={{
+					border: profile.following ? 3 : 0,
+					borderColor: "secondary.main",
+				}}
 				component={Link}
 				to={`/profiles/${profile.id}`}
 				onMouseEnter={handlePopoverOpen}
